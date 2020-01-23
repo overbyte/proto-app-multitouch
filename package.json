@@ -1,0 +1,16 @@
+{
+    "name": "proto-app-multitouch",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "allandt.bik-elliott",
+    "license": "ISC",
+    "dependencies": {
+        "hammerjs": "^2.0.8",
+        "normalize.css": "^8.0.1"
+    }
+}

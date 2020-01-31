@@ -20,3 +20,4 @@ A static webserver (like http-server) will be required to use this
 * Add a proper `start` script to the package.json to run a webserver
 * Add animation to the touch points
 * Sort in clockwise order before re-ordering with a random start (1st player)
+* Fix app icons for ios

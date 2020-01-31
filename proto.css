@@ -17,6 +17,7 @@ body {
 #output {
     position: fixed;
     color: white;
+    font-size: 20rem;
 }
 
 #svgview {

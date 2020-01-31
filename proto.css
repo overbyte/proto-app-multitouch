@@ -2,6 +2,10 @@
     user-select: none;
 }
 
+body {
+    overflow: hidden;
+}
+
 #root {
     background-color: black;
     margin: 0;

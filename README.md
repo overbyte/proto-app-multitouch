@@ -1,7 +1,8 @@
 # proto-app-multitouch
 
 This is an svg view that will allow multiple users to be selected from,
-returning an array of svg graphics, sorted in order starting with a random item. 
+returning an array of svg graphics, sorted in clockwise order starting 
+with a random item. 
 
 By using a web manifest, this PWA will behave like an app.
 

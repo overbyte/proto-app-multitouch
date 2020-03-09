@@ -28,8 +28,12 @@ body {
     left: 0;
 }
 
+.touch-gfx {
+    animation: pulse 0.5s ease infinite alternate;
+}
+
 @keyframes pulse {
     from {
-
+        transform: scale(0);
     }
 }

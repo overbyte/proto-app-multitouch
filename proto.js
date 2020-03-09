@@ -73,7 +73,9 @@ const handleTouchStart = e => {
         graphic.setAttribute('cx', touch.pageX);
         graphic.setAttribute('cy', touch.pageY);
         graphic.setAttribute('r', touchSize);
-        svg.appendChild(graphic);
+        graphic.setAttribute('style', 'transform-origin: '+touch.pageX + 'px ' + touch.pageY + 'px');
+        graphic.setAttribute('class', 'touch-gfx');
+        svgview.appendChild(graphic);
 
         let touchPoint = { graphic, touch };
         touchPoints.push(touchPoint);
@@ -109,6 +111,7 @@ const handleTouchMove = e => {
         const touch = getTouchById(e.changedTouches[i].identifier);
         touch.graphic.setAttribute('cx', e.changedTouches[i].pageX);
         touch.graphic.setAttribute('cy', e.changedTouches[i].pageY);
+        touch.graphic.setAttribute('style', 'transform-origin: '+e.changedTouches[i].pageX + 'px ' + e.changedTouches[i].pageY + 'px');
     }
 };
 

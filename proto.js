@@ -1,6 +1,5 @@
 const el = document.getElementById('root');
 const output = document.getElementById('output');
-const svg = document.getElementById('svgview');
 const touchSize = '80';
 const countdownMax = 3;
 const minTouchPoints = 2;
@@ -27,7 +26,15 @@ let countdownInterval = 0;
 let countdown = 0;
 
 const init = () => {
+    generateSvg();
     document.addEventListener('DOMContentLoaded', setupHandlers);
+};
+
+const generateSvg = () => {
+    svgview = document.createElementNS(svgns, 'svg');
+    svgview.setAttribute('width', window.innerWidth);
+    svgview.setAttribute('height', window.innerHeight);
+    el.appendChild(svgview);
 };
 
 const setupHandlers = () => {

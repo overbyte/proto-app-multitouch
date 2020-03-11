@@ -18,6 +18,7 @@ body {
     position: fixed;
     color: white;
     font-size: 20rem;
+    pointer-events: none;
 }
 
 #svgview {

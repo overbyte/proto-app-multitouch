@@ -53,9 +53,22 @@ const removeHandlers = () => {
 
 const selectFromTouchPoints = () => {
     const selectionIndex = Math.floor(touchPoints.length * Math.random());
-    debug(`selection index: ${selectionIndex} from ${touchPoints.length}`);
+    console.log(`selection index: ${selectionIndex} from ${touchPoints.length}`);
     touchPoints.splice(0, 0, ...touchPoints.splice(selectionIndex));
-    debug(touchPoints);
+
+    // temporarily add an identifier to each graphic
+    touchPoints.forEach((touchPoint, i) => {
+        const txt = document.createElementNS(svgns, 'text');
+        txt.setAttribute('x', touchPoint.touch.pageX);
+        txt.setAttribute('y', touchPoint.touch.pageY);
+        txt.setAttribute('font-size', 16);
+        txt.setAttribute('font-family', 'sans-serif'); txt.setAttribute('class', 'touch-num');
+        svgview.appendChild(txt);
+        txt.textContent = i;
+        console.log(txt);
+        debug(txt);
+    });
+    console.log(touchPoints);
 };
 
 const generateColour = () => colours[Math.ceil(Math.random() * colours.length) - 1];
@@ -112,6 +125,8 @@ const handleTouchMove = e => {
         touch.graphic.setAttribute('cx', e.changedTouches[i].pageX);
         touch.graphic.setAttribute('cy', e.changedTouches[i].pageY);
         touch.graphic.setAttribute('style', 'transform-origin: '+e.changedTouches[i].pageX + 'px ' + e.changedTouches[i].pageY + 'px');
+        // and the touch
+        touch.touch = e.changedTouches[i];
     }
 };
 

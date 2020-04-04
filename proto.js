@@ -26,7 +26,8 @@ let countdown = 0;
 let svgview;
 
 const init = () => {
-    createSvg();
+    svgview = createSvg();
+    el.appendChild(svgview);
     document.addEventListener('DOMContentLoaded', setupHandlers);
 };
 
@@ -66,10 +67,10 @@ const handleTouchStart = e => {
 };
 
 const createSvg = () => {
-    svgview = document.createElementNS(svgns, 'svg');
-    svgview.setAttribute('width', window.innerWidth);
-    svgview.setAttribute('height', window.innerHeight);
-    el.appendChild(svgview);
+    svg = document.createElementNS(svgns, 'svg');
+    svg.setAttribute('width', window.innerWidth);
+    svg.setAttribute('height', window.innerHeight);
+    return svg;
 };
 
 const getCenterPoint = () => {

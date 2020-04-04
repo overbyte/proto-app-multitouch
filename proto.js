@@ -72,6 +72,13 @@ const createSvg = () => {
     el.appendChild(svgview);
 };
 
+const getCenterPoint = () => {
+    return {
+        cx: window.innerWidth / 2,
+        cy: window.innerHeight / 2
+    };
+};
+
 const selectFromTouchPoints = () => {
     const selectionIndex = Math.floor(touchPoints.length * Math.random());
     console.log(`selection index: ${selectionIndex} from ${touchPoints.length}`);

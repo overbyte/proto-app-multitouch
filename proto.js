@@ -144,7 +144,7 @@ const handleTouchEnd = e => {
     for (let i = 0; i < e.changedTouches.length; i++) {
         const touch = getTouchById(e.changedTouches[i].identifier);
         const index = touchPoints.indexOf(touch);
-        svg.removeChild(touch.graphic);
+        svgview.removeChild(touch.graphic);
         touchPoints.splice(index, 1);
     }
 

@@ -3,7 +3,6 @@ const output = document.getElementById('output');
 const touchSize = '80';
 const countdownMax = 3;
 const minTouchPoints = 2;
-
 const svgns = 'http://www.w3.org/2000/svg';
 const colours = [
     '#ff0000',
@@ -24,6 +23,7 @@ const colours = [
 let touchPoints = [];
 let countdownInterval = 0;
 let countdown = 0;
+let svgview;
 
 const init = () => {
     generateSvg();

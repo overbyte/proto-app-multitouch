@@ -1,5 +1,5 @@
-const el = document.getElementById('root');
-const output = document.getElementById('output');
+const el = document.getElementById('root');         // target #root
+const output = document.getElementById('output');   // target #output for debug text output
 const touchSize = '80';
 const countdownMax = 3;
 const minTouchPoints = 2;

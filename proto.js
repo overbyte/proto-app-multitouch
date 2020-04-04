@@ -44,26 +44,6 @@ const removeHandlers = () => {
     svgview.removeEventListener('touchmove', handleTouchMove, false);
 };
 
-const selectFromTouchPoints = () => {
-    const selectionIndex = Math.floor(touchPoints.length * Math.random());
-    console.log(`selection index: ${selectionIndex} from ${touchPoints.length}`);
-    touchPoints.splice(0, 0, ...touchPoints.splice(selectionIndex));
-
-    // temporarily add an identifier to each graphic
-    touchPoints.forEach((touchPoint, i) => {
-        const txt = document.createElementNS(svgns, 'text');
-        txt.setAttribute('x', touchPoint.touch.pageX);
-        txt.setAttribute('y', touchPoint.touch.pageY);
-        txt.setAttribute('font-size', 16);
-        txt.setAttribute('font-family', 'sans-serif'); txt.setAttribute('class', 'touch-num');
-        svgview.appendChild(txt);
-        txt.textContent = i;
-        console.log(txt);
-        debug(txt);
-    });
-    console.log(touchPoints);
-};
-
 const generateColour = () => colours[Math.ceil(Math.random() * colours.length) - 1];
 const getTouchById = id => touchPoints.filter(item => item.touch.identifier === id)[0];
 const createSvgEl = type => document.createElementNS(svgns, type);
@@ -97,6 +77,20 @@ const createSvg = () => {
     svgview.setAttribute('width', window.innerWidth);
     svgview.setAttribute('height', window.innerHeight);
     el.appendChild(svgview);
+};
+
+const selectFromTouchPoints = () => {
+    const selectionIndex = Math.floor(touchPoints.length * Math.random());
+    console.log(`selection index: ${selectionIndex} from ${touchPoints.length}`);
+    touchPoints.splice(0, 0, ...touchPoints.splice(selectionIndex));
+
+    // temporarily add an identifier to each graphic
+    touchPoints.forEach((touchPoint, i) => {
+        const txt = createTouchpointText(touchPoint);
+        svgview.appendChild(txt);
+        txt.textContent = i;
+    });
+    console.log(touchPoints);
 };
 
 const restartCountdown = () => {

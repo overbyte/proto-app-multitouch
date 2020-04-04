@@ -98,6 +98,15 @@ const createTouchPointSvg = touch => {
     return graphic; 
 };
 
+const createTouchpointText = touchPoint => {
+    const txt = document.createElementNS(svgns, 'text');
+    txt.setAttribute('x', touchPoint.touch.pageX);
+    txt.setAttribute('y', touchPoint.touch.pageY);
+    txt.setAttribute('font-size', 16);
+    txt.setAttribute('font-family', 'sans-serif'); txt.setAttribute('class', 'touch-num');
+    return txt;
+};
+
 const restartCountdown = () => {
     clearInterval(countdownInterval);
     countdown = countdownMax;

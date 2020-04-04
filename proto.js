@@ -26,15 +26,8 @@ let countdown = 0;
 let svgview;
 
 const init = () => {
-    generateSvg();
+    createSvg();
     document.addEventListener('DOMContentLoaded', setupHandlers);
-};
-
-const generateSvg = () => {
-    svgview = document.createElementNS(svgns, 'svg');
-    svgview.setAttribute('width', window.innerWidth);
-    svgview.setAttribute('height', window.innerHeight);
-    el.appendChild(svgview);
 };
 
 const setupHandlers = () => {
@@ -97,6 +90,13 @@ const handleTouchStart = e => {
     if (touchPoints.length >= minTouchPoints) {
         restartCountdown();
     }
+};
+
+const createSvg = () => {
+    svgview = document.createElementNS(svgns, 'svg');
+    svgview.setAttribute('width', window.innerWidth);
+    svgview.setAttribute('height', window.innerHeight);
+    el.appendChild(svgview);
 };
 
 const restartCountdown = () => {

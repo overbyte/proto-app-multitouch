@@ -47,20 +47,13 @@ const removeHandlers = () => {
 const generateColour = () => colours[Math.ceil(Math.random() * colours.length) - 1];
 const getTouchById = id => touchPoints.filter(item => item.touch.identifier === id)[0];
 const createSvgEl = type => document.createElementNS(svgns, type);
+const debug = msg => output.innerHTML = msg;
 
 const handleTouchStart = e => {
     e.preventDefault();
     for (let i = 0; i < e.changedTouches.length; i++) {
         const touch = e.changedTouches[i];
-
-        const graphic = createSvgEl('circle');
-        const col = generateColour();
-        graphic.setAttribute('fill', col);
-        graphic.setAttribute('cx', touch.pageX);
-        graphic.setAttribute('cy', touch.pageY);
-        graphic.setAttribute('r', touchSize);
-        graphic.setAttribute('style',  `transform-origin: ${touch.pageX}px ${touch.pageY}px`);
-        graphic.setAttribute('class', 'touch-gfx');
+        const graphic = createTouchPointSvg(touch);
         svgview.appendChild(graphic);
 
         let touchPoint = { graphic, touch };
@@ -91,6 +84,18 @@ const selectFromTouchPoints = () => {
         txt.textContent = i;
     });
     console.log(touchPoints);
+};
+
+const createTouchPointSvg = touch => {
+    const graphic = createSvgEl('circle');
+    const col = generateColour();
+    graphic.setAttribute('fill', col);
+    graphic.setAttribute('cx', touch.pageX);
+    graphic.setAttribute('cy', touch.pageY);
+    graphic.setAttribute('r', touchSize);
+    graphic.setAttribute('style',  `transform-origin: ${touch.pageX}px ${touch.pageY}px`);
+    graphic.setAttribute('class', 'touch-gfx');
+    return graphic; 
 };
 
 const restartCountdown = () => {

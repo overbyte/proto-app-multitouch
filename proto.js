@@ -120,6 +120,7 @@ const restartCountdown = () => {
             clearInterval(countdownInterval);
             removeHandlers();
             selectFromTouchPoints();
+            debug(':)');
         }
     }, 1000);
 };
@@ -155,7 +156,5 @@ const handleTouchEnd = e => {
     }
 };
 
-
-const debug = msg => output.innerHTML = msg;
 
 init();

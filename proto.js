@@ -115,6 +115,28 @@ const createTouchpointText = touchPoint => {
     return txt;
 };
 
+const showCenter = () => {
+    const center = {
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2
+    };
+    const rad = 5;
+    const line1 = generateLine(center.x - rad, center.y - rad, center.x + rad, center.y + rad);
+    const line2 = generateLine(center.x + rad, center.y - rad, center.x - rad, center.y + rad);
+    svgview.appendChild(line1);
+    svgview.appendChild(line2);
+};
+
+const generateLine = (x1, y1, x2, y2) => {
+    const line = createSvgEl('line');
+    line.setAttribute('class', 'center-line');
+    line.setAttribute('x1', x1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y1', y1);
+    line.setAttribute('y2', y2);
+    return line;
+};
+
 const restartCountdown = () => {
     clearInterval(countdownInterval);
     countdown = countdownMax;
@@ -128,6 +150,7 @@ const restartCountdown = () => {
             clearInterval(countdownInterval);
             removeHandlers();
             selectFromTouchPoints();
+            showCenter();
             debug(':)');
         }
     }, 1000);

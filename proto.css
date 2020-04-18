@@ -40,6 +40,11 @@ body {
     text-align: center;
 }
 
+.center-line {
+    stroke: rgb(255, 0, 0);
+    stroke-width: 2px;
+}
+
 @keyframes pulse {
     from {
         transform: scale(0);

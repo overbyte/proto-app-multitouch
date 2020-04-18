@@ -1,3 +1,12 @@
+/*
+// not implemented on iOS 13 atm
+navigator.getWakeLock('screen')
+    .then(wakelock => {
+        wakelock.createRequest();
+        debug('wakelock active');
+    });
+*/
+
 const el = document.getElementById('root');         // target #root
 const output = document.getElementById('output');   // target #output for debug text output
 const touchSize = '80';

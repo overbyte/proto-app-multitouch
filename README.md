@@ -22,3 +22,7 @@ A static webserver (like http-server) will be required to use this
 * Add animation to the touch points
 * Sort in clockwise order before re-ordering with a random start (1st player)
 * Fix app icons for ios
+
+## Known Issues
+
+* iOS Accessibility magnifier option will mess with the multitouch in browsers (sometimes other apps too). Not much we can do about this except add a note for users

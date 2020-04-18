@@ -65,9 +65,10 @@ const handleTouchStart = e => {
     for (let i = 0; i < e.changedTouches.length; i++) {
         const touch = e.changedTouches[i];
         const graphic = createTouchPointSvg(touch);
+        const angle = getAngleFromCenter(touch.pageX, touch.pageY);
         svgview.appendChild(graphic);
 
-        let touchPoint = { graphic, touch };
+        let touchPoint = { graphic, touch, angle };
         touchPoints.push(touchPoint);
     }
 
@@ -85,23 +86,9 @@ const createSvg = () => {
 
 const getCenterPoint = () => {
     return {
-        cx: window.innerWidth / 2,
-        cy: window.innerHeight / 2
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2
     };
-};
-
-const selectFromTouchPoints = () => {
-    const selectionIndex = Math.floor(touchPoints.length * Math.random());
-    console.log(`selection index: ${selectionIndex} from ${touchPoints.length}`);
-    touchPoints.splice(0, 0, ...touchPoints.splice(selectionIndex));
-
-    // temporarily add an identifier to each graphic
-    touchPoints.forEach((touchPoint, i) => {
-        const txt = createTouchpointText(touchPoint);
-        svgview.appendChild(txt);
-        txt.textContent = i;
-    });
-    console.log(touchPoints);
 };
 
 const createTouchPointSvg = touch => {
@@ -114,6 +101,12 @@ const createTouchPointSvg = touch => {
     graphic.setAttribute('style',  `transform-origin: ${touch.pageX}px ${touch.pageY}px`);
     graphic.setAttribute('class', 'touch-gfx');
     return graphic; 
+};
+
+const getAngleFromCenter = (x, y) => {
+    const center = getCenterPoint();
+    const angle = Math.atan2(y - center.y, x - center.x) * 180 / Math.PI + 180;
+    return angle;
 };
 
 const createTouchpointText = touchPoint => {
@@ -144,25 +137,6 @@ const generateLine = (x1, y1, x2, y2) => {
     return line;
 };
 
-const restartCountdown = () => {
-    clearInterval(countdownInterval);
-    countdown = countdownMax;
-    debug(countdown);
-
-    countdownInterval = setInterval(() => {
-        countdown--;
-        debug(countdown);
-
-        if (countdown === 0) {
-            clearInterval(countdownInterval);
-            removeHandlers();
-            selectFromTouchPoints();
-            showCenter();
-            debug(':)');
-        }
-    }, 1000);
-};
-
 const handleTouchMove = e => {
     e.preventDefault();
 
@@ -172,6 +146,7 @@ const handleTouchMove = e => {
         touch.graphic.setAttribute('cx', e.changedTouches[i].pageX);
         touch.graphic.setAttribute('cy', e.changedTouches[i].pageY);
         touch.graphic.setAttribute('style', `transform-origin: ${e.changedTouches[i].pageX}px ${e.changedTouches[i].pageY}px`);
+        touch.angle = getAngleFromCenter(e.changedTouches[i].pageX, e.changedTouches[i].pageY);
         // and the touch
         touch.touch = e.changedTouches[i];
     }
@@ -194,5 +169,37 @@ const handleTouchEnd = e => {
     }
 };
 
+const selectFromTouchPoints = () => {
+    touchPoints.sort((a, b) => a.angle > b.angle ? 1 : -1);
+    const selectionIndex = Math.floor(touchPoints.length * Math.random());
+    console.log(`selection index: ${selectionIndex} from ${touchPoints.length}`);
+    touchPoints.splice(0, 0, ...touchPoints.splice(selectionIndex));
+
+    // temporarily add an identifier to each graphic
+    touchPoints.forEach((touchPoint, i) => {
+        const txt = createTouchpointText(touchPoint);
+        svgview.appendChild(txt);
+        txt.textContent = `${i}:${touchPoint.angle}`;
+    });
+    console.log(touchPoints);
+};
+
+const restartCountdown = () => {
+    clearInterval(countdownInterval);
+    countdown = countdownMax;
+    debug(countdown);
+
+    countdownInterval = setInterval(() => {
+        countdown--;
+        debug(countdown);
+
+        if (countdown === 0) {
+            clearInterval(countdownInterval);
+            removeHandlers();
+            selectFromTouchPoints();
+            debug(':)');
+        }
+    }, 1000);
+};
 
 init();

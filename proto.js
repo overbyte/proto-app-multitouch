@@ -37,6 +37,7 @@ let svgview;
 const init = () => {
     svgview = createSvg();
     el.appendChild(svgview);
+    showCenter();
     document.addEventListener('DOMContentLoaded', setupHandlers);
 };
 
@@ -125,10 +126,7 @@ const createTouchpointText = touchPoint => {
 };
 
 const showCenter = () => {
-    const center = {
-        x: window.innerWidth / 2,
-        y: window.innerHeight / 2
-    };
+    const center = getCenterPoint();
     const rad = 5;
     const line1 = generateLine(center.x - rad, center.y - rad, center.x + rad, center.y + rad);
     const line2 = generateLine(center.x + rad, center.y - rad, center.x - rad, center.y + rad);
